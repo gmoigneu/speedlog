@@ -40,18 +40,18 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
     public function load(ObjectManager $manager)
     {   
         $website = new Website();
-        $website->setName('Github')
-                        ->setUrl('https://github.com/');
+        $website->setName('Amazon')
+                        ->setUrl('http://www.amazon.com/');
     
         $page1 = new Page();
         $page1->setName('Homepage')
-                    ->setUrl('https://github.com');
+                    ->setUrl('http://www.amazon.com/');
         $manager->persist($page1);
         $website->addPage($page1);
 
         $page2 = new Page();
-        $page2->setName('Features')
-                    ->setUrl('https://github.com/features');
+        $page2->setName('Product page')
+                    ->setUrl('http://www.amazon.com/gp/product/B00I15SB16/');
         $manager->persist($page2);
         $website->addPage($page2);
 

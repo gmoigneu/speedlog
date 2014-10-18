@@ -24,7 +24,8 @@
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
         "white-october/pagerfanta-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "nesbot/Carbon": "*"
+        "nesbot/Carbon": "*",
+        "symfony/process": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
