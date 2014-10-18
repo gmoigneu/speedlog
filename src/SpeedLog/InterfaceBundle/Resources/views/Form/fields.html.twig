@@ -1,0 +1,13 @@
+{# src/SpeedLog/InterfaceBundle/Resources/views/Form/fields.html.twig #}
+{% block form_row %}
+{% spaceless %}
+<div class="form-group">
+  {{ form_errors(form) }}
+  <label class="col-sm-2 control-label" for="field-1">{{ form_label(form) }}</label>
+  <div class="col-sm-10">
+    {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+  </div>
+</div>
+{% endspaceless %}
+{% endblock form_row %}
+

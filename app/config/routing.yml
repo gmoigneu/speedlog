@@ -5,3 +5,8 @@ speed_log_user:
 speed_log_core:
     resource: "@SpeedLogCoreBundle/Resources/config/routing.yml"
     prefix:   /
+
+speed_log_interface:
+    resource: "@SpeedLogInterfaceBundle/Resources/config/routing.yml"
+    prefix:   /
+

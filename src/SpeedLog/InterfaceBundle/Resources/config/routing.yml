@@ -1,0 +1,3 @@
+speedlog_interface_homepage:
+    path:     /
+    defaults: { _controller: SpeedLogInterfaceBundle:Default:index }

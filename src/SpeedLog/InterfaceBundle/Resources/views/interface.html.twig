@@ -1,0 +1,495 @@
+{% set user = app.security.getToken().getUser() %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Xenon Boostrap Admin Panel" />
+    <meta name="author" content="" />
+    
+    <title>SpeedLog</title>
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic" />
+    
+    {% stylesheets 
+     '@SpeedLogInterfaceBundle/Resources/public/assets/css/fonts/linecons/css/linecons.css'
+     '@SpeedLogInterfaceBundle/Resources/public/assets/css/fonts/fontawesome/css/font-awesome.min.css'
+     '@SpeedLogInterfaceBundle/Resources/public/assets/css/bootstrap.css'
+     '@SpeedLogInterfaceBundle/Resources/public/assets/css/xenon-core.css'
+     '@SpeedLogInterfaceBundle/Resources/public/assets/css/xenon-forms.css'
+     '@SpeedLogInterfaceBundle/Resources/public/assets/css/xenon-components.css'
+     '@SpeedLogInterfaceBundle/Resources/public/assets/css/xenon-skins.css'
+     '@SpeedLogInterfaceBundle/Resources/public/assets/css/custom.css'
+     '@SpeedLogInterfaceBundle/Resources/public/assets/js/datatables/dataTables.bootstrap.css'
+     %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% javascripts
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/jquery-1.11.1.min.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% block assets %}
+    {% endblock %}
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+</head>
+<body class="page-body">
+
+    <div class="settings-pane">
+            
+        <a href="#" data-toggle="settings-pane" data-animate="true">
+            &times;
+        </a>
+        
+        <div class="settings-pane-inner">
+            
+            <div class="row">
+                
+                <div class="col-md-4">
+                    
+                    <div class="user-info">
+                        
+                        <div class="user-image">
+                            <a href="extra-profile.html">
+                                
+                                {% image '@SpeedLogInterfaceBundle/Resources/public/assets/images/user-2.png'
+                                    output='assets/images/user-2.png' %}
+                                    <img src="{{ asset_url }}" class="img-responsive img-circle" />
+                                {% endimage %}
+                            </a>
+                        </div>
+                        
+                        <div class="user-details">
+                            
+                            <h3>
+                                <a href="extra-profile.html">{{ user.getEmail() }}</a>
+                                
+                                <!-- Available statuses: is-online, is-idle, is-busy and is-offline -->
+                                <span class="user-status is-online"></span>
+                            </h3>
+                            
+                            <p class="user-title">-</p>
+                            
+                            <div class="user-links">
+                                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-blue">Edit Profile</a>
+                                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-primary">Logout</a>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="col-md-8 link-blocks-env">
+                    
+                    
+                    
+                    <div class="links-block left-sep">
+                        <h4>
+                            <a href="#">
+                                <span>Help Desk</span>
+                            </a>
+                        </h4>
+                        
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#">
+                                    <i class="fa-angle-right"></i>
+                                    Support Center
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa-angle-right"></i>
+                                    Submit a Ticket
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa-angle-right"></i>
+                                    API Documentation
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa-angle-right"></i>
+                                    Terms of Service
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        
+        </div>
+        
+    </div>
+    
+    <div class="page-container">
+            
+        <!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
+        <!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
+        <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
+        <div class="sidebar-menu toggle-others fixed">
+            
+            <div class="sidebar-menu-inner">    
+                
+                <header class="logo-env">
+                    
+                    <!-- logo -->
+                    <div class="logo">
+                        <a href="dashboard-1.html" class="logo-expanded">
+                            {% image '@SpeedLogInterfaceBundle/Resources/public/assets/images/logo@2x.png'
+                                output='assets/images/logo@2x.png' %}
+                                <img src="{{ asset_url }}" alt="Logo" height="18" />
+                            {% endimage %}
+                        </a>
+                        
+                        <a href="dashboard-1.html" class="logo-collapsed">
+                            {% image '@SpeedLogInterfaceBundle/Resources/public/assets/images/logo-collapsed@2x.png'
+                                output='assets/images/logo-collapsed@2x.png' %}
+                                <img src="{{ asset_url }}" alt="Logo" height="40" />
+                            {% endimage %}
+                        </a>
+                    </div>
+                    
+                    <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+                    <div class="mobile-menu-toggle visible-xs">
+                        <a href="#" data-toggle="user-info-menu">
+                            <i class="fa-bell-o"></i>
+                            <span class="badge badge-success">7</span>
+                        </a>
+                        
+                        <a href="#" data-toggle="mobile-menu">
+                            <i class="fa-bars"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- This will open the popup with user profile settings, you can use for any purpose, just be creative -->
+                    <div class="settings-icon">
+                        <a href="#" data-toggle="settings-pane" data-animate="true">
+                            <i class="linecons-cog"></i>
+                        </a>
+                    </div>
+                    
+                                
+                </header>
+                        
+                
+                        
+                <ul id="main-menu" class="main-menu">
+                    <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+                    <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+                    <li>
+                        <a href="{{ path('speedlog_interface_homepage') }}">
+                            <i class="fa-dashboard"></i>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    {%if user.hasRole('ROLE_USER') %}
+                    <li>
+                        <a href="">
+                            <i class="fa-download"></i>
+                            <span class="title">Websites</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa-folder"></i>
+                            <span class="title">Report log</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {%if user.hasRole('ROLE_ADMIN') %}
+                    <li>
+                        <a href="">
+                            <i class="fa-users"></i>
+                            <span class="title">Users</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                        
+            </div>
+            
+        </div>
+        
+        <div class="main-content">
+                    
+            <!-- User Info, Notifications and Menu Bar -->
+            <nav class="navbar user-info-navbar" role="navigation">
+                
+                <!-- Left links for user info navbar -->
+                <ul class="user-info-menu left-links list-inline list-unstyled">
+                    
+                    <li class="hidden-sm hidden-xs">
+                        <a href="#" data-toggle="sidebar">
+                            <i class="fa-bars"></i>
+                        </a>
+                    </li>
+                    
+                    <li class="dropdown hover-line">
+                        <a href="#" data-toggle="dropdown">
+                            <i class="fa-envelope-o"></i>
+                            <span class="badge badge-green">15</span>
+                        </a>
+                            
+                        <ul class="dropdown-menu messages">
+                            <li>
+                                    
+                                <ul class="dropdown-menu-list list-unstyled ps-scrollbar">
+                                
+                                    <li class="active"><!-- "active" class means message is unread -->
+                                        <a href="#">
+                                            <span class="line">
+                                                <strong>Luc Chartier</strong>
+                                                <span class="light small">- yesterday</span>
+                                            </span>
+                                            
+                                            <span class="line desc small">
+                                                This ain’t our first item, it is the best of the rest.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="active">
+                                        <a href="#">
+                                            <span class="line">
+                                                <strong>Salma Nyberg</strong>
+                                                <span class="light small">- 2 days ago</span>
+                                            </span>
+                                            
+                                            <span class="line desc small">
+                                                Oh he decisively impression attachment friendship so if everything. 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="#">
+                                            <span class="line">
+                                                Hayden Cartwright
+                                                <span class="light small">- a week ago</span>
+                                            </span>
+                                            
+                                            <span class="line desc small">
+                                                Whose her enjoy chief new young. Felicity if ye required likewise so doubtful.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="#">
+                                            <span class="line">
+                                                Sandra Eberhardt
+                                                <span class="light small">- 16 days ago</span>
+                                            </span>
+                                            
+                                            <span class="line desc small">
+                                                On so attention necessary at by provision otherwise existence direction.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                    <!-- Repeated -->
+                                    
+                                    <li class="active"><!-- "active" class means message is unread -->
+                                        <a href="#">
+                                            <span class="line">
+                                                <strong>Luc Chartier</strong>
+                                                <span class="light small">- yesterday</span>
+                                            </span>
+                                            
+                                            <span class="line desc small">
+                                                This ain’t our first item, it is the best of the rest.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="active">
+                                        <a href="#">
+                                            <span class="line">
+                                                <strong>Salma Nyberg</strong>
+                                                <span class="light small">- 2 days ago</span>
+                                            </span>
+                                            
+                                            <span class="line desc small">
+                                                Oh he decisively impression attachment friendship so if everything. 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="#">
+                                            <span class="line">
+                                                Hayden Cartwright
+                                                <span class="light small">- a week ago</span>
+                                            </span>
+                                            
+                                            <span class="line desc small">
+                                                Whose her enjoy chief new young. Felicity if ye required likewise so doubtful.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="#">
+                                            <span class="line">
+                                                Sandra Eberhardt
+                                                <span class="light small">- 16 days ago</span>
+                                            </span>
+                                            
+                                            <span class="line desc small">
+                                                On so attention necessary at by provision otherwise existence direction.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                                
+                            </li>
+                            
+                            <li class="external">
+                                <a href="blank-sidebar.html">
+                                    <span>All Messages</span>
+                                    <i class="fa-link-ext"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown hover-line">
+                        
+                    </li>
+                </ul>
+                
+                
+                <!-- Right links for user info navbar -->
+                <ul class="user-info-menu right-links list-inline list-unstyled">
+                    
+                    <li class="search-form"><!-- You can add "always-visible" to show make the search input visible -->
+                        
+                        <form method="get" action="extra-search.html">
+                            <input type="text" name="s" class="form-control search-field" placeholder="Type to search..." />
+                            
+                            <button type="submit" class="btn btn-link">
+                                <i class="linecons-search"></i>
+                            </button>
+                        </form>
+                        
+                    </li>
+                    
+                    <li class="dropdown user-profile">
+                        <a href="#" data-toggle="dropdown">
+                            {% image '@SpeedLogInterfaceBundle/Resources/public/assets/images/user-4.png'
+                                output='assets/images/user-4.png' %}
+                                <img src="{{ asset_url }}" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+                            {% endimage %}
+                            
+                            <span>
+                                {{ user.getEmail() }}
+                                <i class="fa-angle-down"></i>
+                            </span>
+                        </a>
+                        
+                        <ul class="dropdown-menu user-profile-menu list-unstyled">
+                            <li>
+                                <a href="#settings">
+                                    <i class="fa-wrench"></i>
+                                    Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#profile">
+                                    <i class="fa-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#help">
+                                    <i class="fa-info"></i>
+                                    Help
+                                </a>
+                            </li>
+                            <li class="last">
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    <i class="fa-lock"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    
+                </ul>
+                
+            </nav>
+            
+            <div class="page-title">
+                {% block pagetitle %}
+                <div class="title-env">
+                    <h1 class="title">Dashboard</h1>
+                    <p class="description"></p>
+                </div>
+                {% endblock %}
+                
+                {% block breadcrumb %}
+                <!-- <div class="breadcrumb-env">
+                    <ol class="breadcrumb bc-1">
+                        <li>
+                            <a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+                        </li>
+                        <li>
+                            <a href="tables-basic.html">Tables</a>
+                        </li>
+                        <li class="active">
+                            <strong>Data Tables</strong>
+                        </li>
+                    </ol>
+                </div> -->
+                {% endblock %}
+
+            </div>
+
+            <div id="content">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!-- Bottom Scripts -->
+    {% javascripts
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/bootstrap.min.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/TweenMax.min.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/resizeable.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/joinable.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/xenon-api.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/xenon-toggles.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/xenon-custom.js' 
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/datatables/js/jquery.dataTables.min.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/datatables/dataTables.bootstrap.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/datatables/tabletools/dataTables.tableTools.min.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+
+</body>
+</html>

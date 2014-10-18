@@ -32,9 +32,40 @@ twig:
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: true
-    bundles:        [ ]
+    use_controller: false
+    #bundles:        [  ]
     #java: /usr/bin/java
+    assets:
+        lineicons-eot:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/css/fonts/linecons/font/linecons.eot'
+            output: 'fonts/linecons.eot'
+        lineicons-ttf:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/css/fonts/linecons/font/linecons.ttf'
+            output: 'fonts/linecons.ttf'
+        lineicons-woff:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/css/fonts/linecons/font/linecons.woff'
+            output: 'fonts/linecons.woff'
+        lineicons-svg:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/css/fonts/linecons/font/linecons.svg'
+            output: 'fonts/linecons.svg'
+        fontawesome-eot:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/css/fonts/fontawesome/fonts/fontawesome-webfont.eot'
+            output: 'fonts/fontawesome-webfont.eot'
+        fontawesome-svg:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/css/fonts/fontawesome/fonts/fontawesome-webfont.svg'
+            output: 'fonts/fontawesome-webfont.svg'
+        fontawesome-woff:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/css/fonts/fontawesome/fonts/fontawesome-webfont.woff'
+            output: 'fonts/fontawesome-webfont.woff'
+        fontawesome-ttf:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/css/fonts/fontawesome/fonts/fontawesome-webfont.ttf'
+            output: 'fonts/fontawesome-webfont.ttf'
+        dropzone-spritemap:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/js/dropzone/images/spritemap.png'
+            output: 'assets/images/dropzone-spritemap.png'
+        dropzone-spritemap-2x:
+            inputs: '%kernel.root_dir%/../src/SpeedLog/InterfaceBundle/Resources/public/assets/js/dropzone/images/spritemap@2x.png'
+            output: 'assets/images/dropzone-spritemap@2x.png'
     filters:
         cssrewrite: ~
         #closure:

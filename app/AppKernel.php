@@ -25,6 +25,7 @@ class AppKernel extends Kernel
 
             new SpeedLog\CoreBundle\SpeedLogCoreBundle(),
             new SpeedLog\UserBundle\SpeedLogUserBundle(),
+            new SpeedLog\InterfaceBundle\SpeedLogInterfaceBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
