@@ -71,10 +71,7 @@ doctrine_mongodb:
     default_database: speedlog
     document_managers:
         default:
-            mappings:
-                SpeedLogCoreBundle: ~
-                SpeedLogUserBundle: ~
-            metadata_cache_driver: array # array, apc, xcache, memcache
+            auto_mapping: true
 
 fos_user:
     db_driver: mongodb # other valid values are 'mongodb', 'couchdb' and 'propel'
