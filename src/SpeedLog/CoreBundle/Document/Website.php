@@ -3,12 +3,12 @@
 namespace SpeedLog\CoreBundle\Document;
 
 use SpeedLog\UserBundle\Document\User;
+use SpeedLog\UserBundle\Document\Group;
 use SpeedLog\CoreBundle\Document\Page;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @MongoDB\Document
  * @MongoDB\Document(repositoryClass="SpeedLog\CoreBundle\Repository\WebsiteRepository")
  */
 class Website
@@ -27,6 +27,11 @@ class Website
      * @MongoDB\String
      */
     protected $url;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="SpeedLog\UserBundle\Document\Group")
+     */
+    protected $group;
 
     /** @MongoDB\EmbedMany(targetDocument="Page") */
     private $pages = array();
@@ -181,4 +186,26 @@ class Website
     }
     
     
+
+    /**
+     * Set group
+     *
+     * @param SpeedLog\UserBundle\Document\Group $group
+     * @return self
+     */
+    public function setGroup(\SpeedLog\UserBundle\Document\Group $group)
+    {
+        $this->group = $group;
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return SpeedLog\UserBundle\Document\Group $group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
 }

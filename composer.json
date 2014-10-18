@@ -25,7 +25,8 @@
         "white-october/pagerfanta-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "nesbot/Carbon": "*",
-        "symfony/process": "*"
+        "symfony/process": "*",
+        "ismaambrosi/generator-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

@@ -195,14 +195,14 @@
                     <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                     <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
                     <li>
-                        <a href="{{ path('speedlog_interface_homepage') }}">
+                        <a href="{{ path('dashboard') }}">
                             <i class="fa-dashboard"></i>
                             <span class="title">Dashboard</span>
                         </a>
                     </li>
                     {%if user.hasRole('ROLE_USER') %}
                     <li>
-                        <a href="">
+                        <a href="{{ path('website') }}">
                             <i class="fa-download"></i>
                             <span class="title">Websites</span>
                         </a>

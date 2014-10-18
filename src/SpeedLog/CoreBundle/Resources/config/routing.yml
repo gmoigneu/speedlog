@@ -1,3 +1,0 @@
-speed_log_core_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: SpeedLogCoreBundle:Default:index }

@@ -26,8 +26,11 @@ framework:
 
 # Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
+    debug:            true
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'SpeedLogInterfaceBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -103,6 +106,7 @@ doctrine_mongodb:
     document_managers:
         default:
             auto_mapping: true
+    auto_generate_hydrator_classes: true 
 
 fos_user:
     db_driver: mongodb # other valid values are 'mongodb', 'couchdb' and 'propel'

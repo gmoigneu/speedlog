@@ -39,8 +39,11 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {   
+        $group = $manager->getRepository('SpeedLog\UserBundle\Document\Group')->findOneBy(array('name' => 'Test'));
+
         $website = new Website();
         $website->setName('Amazon')
+                        ->setGroup($group)
                         ->setUrl('http://www.amazon.com/');
     
         $page1 = new Page();
@@ -55,7 +58,10 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $manager->persist($page2);
         $website->addPage($page2);
 
+        $group->addWebsite($website);
+
         $manager->persist($website);
+ 
         $manager->flush();
     }
 }

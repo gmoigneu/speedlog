@@ -47,7 +47,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $user->setEmail('admin@speedlog.dev.net');
         $user->setPlainPassword('speedlog');
         $user->setEnabled(1);
-        $user->addGroup($groupTest);
+        $user->setGroup($groupTest);
         $user->addRole('ROLE_ADMIN');
         $userManager->updateUser($user);
 
@@ -56,7 +56,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $user->setEmail('user@speedlog.dev.net');
         $user->setPlainPassword('speedlog');
         $user->setEnabled(1);
-        $user->addGroup($groupTest);
+        $user->setGroup($groupTest);
         $userManager->updateUser($user);
 
         $manager->flush();
