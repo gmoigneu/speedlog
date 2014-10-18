@@ -22,7 +22,7 @@ class Report
     protected $duration;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Page")
+     * @MongoDB\ReferenceOne(targetDocument="Page", simple=true)
      */
     protected $page;
 

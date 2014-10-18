@@ -43,6 +43,7 @@ class Report
       }
 
       $report->__set($key, $value);
+      $report->setPage($this->page);
       $this->dm->persist($report);
       $this->dm->flush();
     }
