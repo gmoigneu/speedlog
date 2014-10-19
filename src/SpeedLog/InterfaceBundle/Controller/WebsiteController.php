@@ -105,6 +105,10 @@ class WebsiteController extends Controller
             throw $this->createNotFoundException('Unable to find Website document.');
         }
 
+        foreach ($document->getPages() as $p) {
+            $p->lastReport = $this->get('speedlog_core.page')->getLastReport($p);
+        }
+
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
