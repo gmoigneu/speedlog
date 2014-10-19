@@ -111,6 +111,8 @@ class WebsiteController extends Controller
             $p->lastReport = $this->get('speedlog_core.page')->getLastReport($p);
         }
 
+        $document->timeEvolutionPerPage = $this->get('speedlog_core.website')->getTimeEvolutionPerPage($document);
+
         $deleteForm = $this->createDeleteForm($id);
 
         return array(

@@ -23,4 +23,15 @@ class Page
 
     return $report;
   }
+
+  public function findPage($wid, $pid)
+  {
+    $website = $this->dm->getRepository('SpeedLogCoreBundle:Website')->find($wid);
+
+    foreach ($website->getPages() as $page) {
+      if($pid == $page->getId()) return $page;
+    }
+
+    throw $this->createNotFoundException('Unable to find Page document.');
+  }
 }

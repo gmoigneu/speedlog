@@ -31,8 +31,8 @@
                   <tr>
                     <th>{% trans %}Name{% endtrans %}</th>
                     <th>{% trans %}Last check{% endtrans %}</th>
-                    <th>{% trans %}Backend time{% endtrans %}</th>
-                    <th>{% trans %}Frontend time{% endtrans %}</th>
+                    <th>{% trans %}Loading time{% endtrans %}</th>
+                    <th>{% trans %}Evolution{% endtrans %}</th>
                     <th>{% trans %}Actions{% endtrans %}</th>
                   </tr>
                 </thead>
@@ -41,8 +41,8 @@
                   <tr>
                     <th>{% trans %}Name{% endtrans %}</th>
                     <th>{% trans %}Last check{% endtrans %}</th>
-                    <th>{% trans %}Backend time{% endtrans %}</th>
-                    <th>{% trans %}Frontend time{% endtrans %}</th>
+                    <th>{% trans %}Loading time{% endtrans %}</th>
+                    <th>{% trans %}Evolution{% endtrans %}</th>
                     <th>{% trans %}Actions{% endtrans %}</th>
                   </tr>
                 </tfoot>
@@ -50,22 +50,23 @@
                 <tbody>
                   {% for p in document.pages %}
                   <tr>
-                    <td><a href="{{ path('website_show', { 'id': p.id }) }}">{{ p.name }}</a></td>
+                    <td><a href="{{ path('page_show', { 'wid': document.id, 'pid': p.id }) }}">{{ p.name }}</a></td>
                     {% if p.lastReport is null %}
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
                         <td>
-                          <a href="{{ path('website_show', { 'id': p.id }) }}" class="btn btn-blue btn-sm btn-icon icon-left">
+                          <a href="{{ path('page_show', { 'wid': document.id, 'pid': p.id }) }}" class="btn btn-blue btn-sm btn-icon icon-left">
                             {% trans %}Generate Report{% endtrans %}
                           </a>
                         </td>
                     {% else %}
                         <td>{{ p.lastReport.created|human_date }}</td>
-                        <td>{{ p.lastReport.httpTrafficCompleted }} ms</td>
-                        <td>{{ p.lastReport.domComplete }} ms</td>
+                        <td>{{ p.lastReport.timeToLastByte + p.lastReport.domComplete }} ms</td>
+                        <td width="200"><div class="timeEvolution" data-id="{{ p.id }}"></div>
+                        </td>
                         <td>
-                          <a href="{{ path('website_show', { 'id': p.id }) }}" class="btn btn-secondary btn-sm btn-icon icon-left">
+                          <a href="{{ path('page_show', { 'wid': document.id, 'pid': p.id }) }}" class="btn btn-secondary btn-sm btn-icon icon-left">
                             {% trans %}View Reports{% endtrans %}
                           </a>
                         </td>
@@ -75,6 +76,24 @@
                   {% endfor %}
                 </tbody>
     </table>
+    <script>
+      var dataSource = {{ document.timeEvolutionPerPage|raw }}
+      timeOptions = {
+          dataSource: dataSource,
+          argumentField: 'day',
+          valueField: '',
+          type: 'splinearea',
+          lineColor: '#ff9800',
+          minColor: '#263248',
+          maxColor: '#b9121b',
+          pointSize: 6,
+          showMinMax: true,
+          showFirstLast: true
+      };
+      $('.timeEvolution').each(function (e) {
+        $(this).dxSparkline($.extend(timeOptions, { valueField: $(this).attr('data-id') }));
+      }) 
+    </script>
   </div>
 </div>
 

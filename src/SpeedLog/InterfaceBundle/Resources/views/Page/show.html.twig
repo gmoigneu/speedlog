@@ -1,0 +1,271 @@
+{% extends 'SpeedLogInterfaceBundle::interface.html.twig' %}
+
+{% block pagetitle %}
+<div class="title-env">
+    <h1 class="title">{{ page.name }}</h1>
+    <p class="description">{{ page.url }}</p>
+</div>
+<div class="breadcrumb-env">
+  <a href="{{ path('website_show', { 'id': wid }) }}" class="btn btn-lg btn-blue">{% trans %}Back to page list{% endtrans %}</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-3">
+    <div class="xe-widget xe-counter-block xe-counter-block-white">
+      <div class="xe-upper">
+        
+        <div class="xe-icon">
+          <i class="fa-cloud-download"></i>
+        </div>
+        <div class="xe-label">
+          <strong class="num">{{ page.lastReport.httpTrafficCompleted }} ms</strong>
+          <span>HTTP Traffic</span>
+        </div>
+        
+      </div>
+      <div class="xe-lower">
+        <div class="border"></div>
+        <span>Time to the last byte of the last HTTP response</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="xe-widget xe-counter-block xe-counter-block-white">
+      <div class="xe-upper">
+        
+        <div class="xe-icon">
+          <i class="fa-dashboard"></i>
+        </div>
+        <div class="xe-label">
+          <strong class="num">{{ page.lastReport.domComplete }} ms</strong>
+          <span>DOM Complete</span>
+        </div>
+        
+      </div>
+      <div class="xe-lower">
+        <div class="border"></div>
+        <span>Time it took to load all page resources</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="xe-widget xe-counter-block xe-counter-block-white">
+      <div class="xe-upper">
+        
+        <div class="xe-icon">
+          <i class="fa-code"></i>
+        </div>
+        <div class="xe-label">
+          <strong class="num">{{ page.lastReport.bodySize|to_kb }} kb</strong>
+          <span>Body size</span>
+        </div>
+        
+      </div>
+      <div class="xe-lower">
+        <div class="border"></div>
+        <span>Size of the content of all responses</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="xe-widget xe-counter-block xe-counter-block-white">
+      <div class="xe-upper">
+        
+        <div class="xe-icon">
+          <i class="fa-exchange"></i>
+        </div>
+        <div class="xe-label">
+          <strong class="num">{{ page.lastReport.requests }}</strong>
+          <span>Requests</span>
+        </div>
+      </div>
+      <div class="xe-lower">
+        <div class="border"></div>
+        <span>Total number of HTTP requests made</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-3">
+    <div class="xe-widget xe-counter xe-counter-white">
+      <div class="xe-icon">
+        <i class="fa-file-code-o"></i>
+      </div>
+      <div class="xe-label">
+        <strong class="num">{{ page.lastReport.htmlSize|to_kb }} kb</strong>
+        <span>HTML: {{ page.lastReport.htmlCount }} files</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="xe-widget xe-counter xe-counter-white">
+      <div class="xe-icon">
+        <i class="fa-header"></i>
+      </div>
+      <div class="xe-label">
+        <strong class="num"> {{ page.lastReport.cssSize|to_kb }} kb</strong>
+        <span>CSS : {{ page.lastReport.cssCount }} files</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="xe-widget xe-counter xe-counter-white">
+      <div class="xe-icon">
+        <i class="fa-copy"></i>
+      </div>
+      <div class="xe-label">
+        <strong class="num">{{ page.lastReport.jsSize|to_kb }} kb</strong>
+        <span>JS : {{ page.lastReport.jsCount }} files</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="xe-widget xe-counter xe-counter-white">
+      <div class="xe-icon"> 
+        <i class="fa-file-image-o"></i>
+      </div>
+      <div class="xe-label">
+        <strong class="num"> {{ page.lastReport.imageSize|to_kb }} kb</strong>
+        <span>Images : {{ page.lastReport.imageCount }} files</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div  class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{% trans %}Evolution{% endtrans %}</h3>
+  </div>
+  <div class="panel-body">  
+    <div id="loadingChart"></div>
+    <script>
+      var dataSource = {{ ds|raw }}
+
+      $("#loadingChart").dxChart({
+          dataSource: dataSource,
+          commonSeriesSettings: {
+              type: "stackedArea",
+              argumentField: "period"
+          },
+          series: [
+              { valueField: "timeToFirstByte", name: "Waiting time", color: "#111" },
+              { valueField: "timeToLastByte", name: "Receiving time", color: "#263248" },
+              { valueField: "domContentLoaded", name: "Page loaded", color: "#7e8aa2" },
+              { valueField: "domComplete", name: "Page usable", color: "#ff9800" }
+          ],
+          title: "Loading times",
+          argumentAxis:{
+              valueMarginsEnabled: false,
+              grid:{
+                  visible: true
+              }
+          },
+          valueAxis: {
+              title: { 
+                  text: "time in ms"
+              }
+          },
+          tooltip:{
+              enabled: true
+          },
+          legend: {
+              verticalAlignment: "bottom",
+              horizontalAlignment: "center"
+          }
+      });
+    </script>
+  </div>
+  <div class="panel-body">  
+    <div id="requestsChart"></div>
+    <script>
+      var dataSource = {{ ds|raw }}
+
+      $("#requestsChart").dxChart({
+          dataSource: dataSource,
+          commonSeriesSettings: {
+              argumentField: "period"
+          },
+          series: [
+              { valueField: "notFound", name: "Not found", color: "#b9121b" },
+              { valueField: "postRequests", name: "POST", color: "#7e8aa2" },
+              { valueField: "gzipRequests", name: "Gzip", color: "#263248" },
+              { valueField: "requests", name: "Total Requests", color: "#ff9800" }
+          ],
+          title: "Requests",
+          argumentAxis:{
+              valueMarginsEnabled: false,
+              grid:{
+                  visible: true
+              }
+          },
+          valueAxis: {
+              title: { 
+                  text: "size in kb"
+              }
+          },
+
+          tooltip:{
+              enabled: true
+          },
+          legend: {
+              verticalAlignment: "bottom",
+              horizontalAlignment: "center"
+          }
+      });
+    </script>
+  </div>
+  <div class="panel-body">  
+    <div id="sizeChart"></div>
+    <script>
+      var dataSource = {{ ds|raw }}
+
+      $("#sizeChart").dxChart({
+          dataSource: dataSource,
+          commonSeriesSettings: {
+              type: "stackedArea",
+              argumentField: "period"
+          },
+          series: [
+              { valueField: "webfontSize", name: "Webfonts" },
+              { valueField: "videoSize", name: "Video" },
+              { valueField: "base64Size", name: "Base64" },
+              { valueField: "otherSize", name: "Other" },
+              { valueField: "htmlSize", name: "HTML", color: "#111" },
+              { valueField: "cssSize", name: "CSS", color: "#263248" },
+              { valueField: "jsSize", name: "JS", color: "#7e8aa2" },
+              { valueField: "jsonSize", name: "Json", color: "#ccc" },
+              { valueField: "imageSize", name: "Images", color: "#ff9800" }
+              
+          ],
+          title: "Resources sizes",
+          argumentAxis:{
+              valueMarginsEnabled: false,
+              grid:{
+                  visible: true
+              }
+          },
+          valueAxis: {
+              title: { 
+                  text: "size in kb"
+              }
+          },
+
+          tooltip:{
+              enabled: true
+          },
+          legend: {
+              verticalAlignment: "bottom",
+              horizontalAlignment: "center"
+          }
+      });
+    </script>
+  </div>
+  
+</div>
+
+{% endblock %}

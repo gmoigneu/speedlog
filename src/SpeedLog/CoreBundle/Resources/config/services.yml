@@ -2,3 +2,6 @@ services:
   speedlog_core.page:
       class: SpeedLog\CoreBundle\Model\Page
       arguments: [@doctrine_mongodb.odm.document_manager]
+  speedlog_core.website:
+      class: SpeedLog\CoreBundle\Model\Website
+      arguments: [@doctrine_mongodb.odm.document_manager]

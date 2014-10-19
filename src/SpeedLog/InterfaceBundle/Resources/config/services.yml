@@ -3,3 +3,7 @@ services:
           class: SpeedLog\InterfaceBundle\Twig\CarbonExtension
           tags:
               - { name: twig.extension }
+  speedlog_interface.twig.bytes_extension:
+          class: SpeedLog\InterfaceBundle\Twig\BytesExtension
+          tags:
+              - { name: twig.extension }

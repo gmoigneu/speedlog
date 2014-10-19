@@ -22,6 +22,6 @@ class CarbonExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'acme_extension';
+        return 'carbon_extension';
     }
 }

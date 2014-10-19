@@ -29,7 +29,10 @@
     {% endstylesheets %}
 
     {% javascripts
-    '@SpeedLogInterfaceBundle/Resources/public/assets/js/jquery-1.11.1.min.js' %}
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/jquery-1.11.1.min.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/devexpress-web-14.1/js/globalize.min.js'
+    '@SpeedLogInterfaceBundle/Resources/public/assets/js/devexpress-web-14.1/js/dx.chartjs.js'
+     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -486,6 +489,7 @@
     '@SpeedLogInterfaceBundle/Resources/public/assets/js/datatables/dataTables.bootstrap.js'
     '@SpeedLogInterfaceBundle/Resources/public/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js'
     '@SpeedLogInterfaceBundle/Resources/public/assets/js/datatables/tabletools/dataTables.tableTools.min.js'
+
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
