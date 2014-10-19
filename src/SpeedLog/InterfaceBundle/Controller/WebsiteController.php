@@ -44,7 +44,7 @@ class WebsiteController extends Controller
     public function newAction()
     {
         $document = new Website();
-        $form = $this->createForm(new WebsiteType(), $document);
+        $form = $this->createNewForm($document);
 
         return array(
             'document' => $document,
@@ -71,6 +71,8 @@ class WebsiteController extends Controller
 
         if ($form->isValid()) {
             $dm = $this->getDocumentManager();
+            $document->setGroup($this->getUser()->getGroup());
+            $this->getUser()->getGroup()->addWebsite($document);
             $dm->persist($document);
             $dm->flush();
 
@@ -222,6 +224,18 @@ class WebsiteController extends Controller
         }
 
         return $this->redirect($this->generateUrl('website'));
+    }
+
+    private function createNewForm(Website $document)
+    {
+        $form = $this->createForm(new WebsiteType(), $document, array(
+            'action' => $this->generateUrl('website_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Update'));
+
+        return $form;
     }
 
     private function createEditForm(Website $document)
