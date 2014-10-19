@@ -1,7 +1,7 @@
 speedlog
 ========
 
-Symfony app based on Phantomas to track websites performance
+Symfony app based on [Phantomas](https://github.com/macbre/phantomas) to track websites performance.
 
 ![Page](/doc/page.png?raw=true "Page")
 ![Website](/doc/website.png?raw=true "Website")
